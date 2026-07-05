@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig(({ command }) => ({
-  base: command === "build" ? "/transport-company/" : "/",
+  base: command === "build" ? "/avinash-roadways/" : "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
