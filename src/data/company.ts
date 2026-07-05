@@ -14,7 +14,7 @@ export const companyInfo: CompanyInfo = {
   tagline: "Moving the World Forward, One Delivery at a Time",
   description:
     "Avinash Roadways is a trusted transportation company committed to delivering excellence on every route. With 5 years of dedicated service, we provide reliable, efficient, and safe road transport solutions tailored to your business needs.",
-  phone: "+91 72229 66125",
+  phone: "+91 74409 66125",
   email: "avinashroadways1@gmail.com",
   address: "Birgaon, Raipur, Chhattisgarh - 493221",
   hours: "Mon – Fri: 7:00 AM – 8:00 PM | Sat: 8:00 AM – 4:00 PM",

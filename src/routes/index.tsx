@@ -1,13 +1,11 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
-
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const Services = lazy(() => import("@/pages/Services"));
 const Fleet = lazy(() => import("@/pages/Fleet"));
 const Contact = lazy(() => import("@/pages/Contact"));
-
 function LoadingSpinner() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">
@@ -18,56 +16,59 @@ function LoadingSpinner() {
     </div>
   );
 }
-
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <MainLayout />,
+      children: [
+        {
+          index: true,
+          element: (
+            <Suspense fallback={<LoadingSpinner />}>
+              <Home />
+            </Suspense>
+          ),
+        },
+        {
+          path: "about",
+          element: (
+            <Suspense fallback={<LoadingSpinner />}>
+              <About />
+            </Suspense>
+          ),
+        },
+        {
+          path: "services",
+          element: (
+            <Suspense fallback={<LoadingSpinner />}>
+              <Services />
+            </Suspense>
+          ),
+        },
+        {
+          path: "fleet",
+          element: (
+            <Suspense fallback={<LoadingSpinner />}>
+              <Fleet />
+            </Suspense>
+          ),
+        },
+        {
+          path: "contact",
+          element: (
+            <Suspense fallback={<LoadingSpinner />}>
+              <Contact />
+            </Suspense>
+          ),
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      {
-        index: true,
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <Home />
-          </Suspense>
-        ),
-      },
-      {
-        path: "about",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <About />
-          </Suspense>
-        ),
-      },
-      {
-        path: "services",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <Services />
-          </Suspense>
-        ),
-      },
-      {
-        path: "fleet",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <Fleet />
-          </Suspense>
-        ),
-      },
-      {
-        path: "contact",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <Contact />
-          </Suspense>
-        ),
-      },
-    ],
-  },
-]);
-
+    basename: import.meta.env.BASE_URL,
+  }
+);
 export default function AppRouter() {
   return <RouterProvider router={router} />;
 }
