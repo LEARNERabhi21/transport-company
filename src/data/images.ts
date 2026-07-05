@@ -1,4 +1,20 @@
-export const images = {
+function withBase(path: string): string {
+  const base = import.meta.env.BASE_URL;
+  return `${base}${path.replace(/^\//, "")}`;
+}
+
+function withBaseAll<T extends Record<string, Record<string, string>>>(obj: T): T {
+  return Object.fromEntries(
+    Object.entries(obj).map(([category, paths]) => [
+      category,
+      Object.fromEntries(
+        Object.entries(paths).map(([key, path]) => [key, withBase(path)])
+      ),
+    ])
+  ) as T;
+}
+
+const rawImages = {
   hero: {
     main: "/images/hero/hero-banner.png",
     about: "/images/hero/about-hero.png",
@@ -43,6 +59,7 @@ export const images = {
     history: "/images/company/office.png",
     logo: "/images/logo.jpg",
   },
-} as const;
+};
 
+export const images = withBaseAll(rawImages);
 export type ImageCategory = keyof typeof images;
